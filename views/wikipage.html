@@ -1,16 +1,21 @@
-{% extends "layout.html" %} {% block content %}
-
+<!-- {% extends "layout.html" %} {% block content %}
+<br>
 <br>
 <br>
 <h3>{{title}}
-
   <br>
   <br>
   <small> (
     <a href="{{page.route}}/similar">Similar</a>)</small>
 </h3>
+
 <h4>by
-  <a href="PLACEHOLDER-AUTHOR-URL">PLACEHOLDER AUTHOR NAME</a>
+  <br>
+  <a href="/users/{{ page.author.id }}">{{ page.author.name }}</a>
+</h4>
+<br>
+<br>
+<a href="/wiki/{{name}}">{{page.name}}</a>
 </h4>
 <div>PLACEHOLDER TAG LIST</div>
 <hr/>
@@ -20,4 +25,21 @@
 <a href="/wiki/{{page.urlTitle}}/edit" class="btn btn-primary">edit this page</a>
 <a href="/wiki/{{page.urlTitle}}/delete" class="btn btn-danger">delete this page</a>
 
+{% endblock %} -->
+
+{% extends "layout.html" %} {% block content %}
+<h3>{{page.title}}
+  <small> (
+    <a href="PLACEHOLDER_URL_TITLE/similar">Similar</a>)</small>
+</h3>
+<h4>by
+  <a href="PLACEHOLDER-AUTHOR-URL">{{name}}</a>
+</h4>
+<div>PLACEHOLDER TAG LIST</div>
+<hr/>
+<div>PLACEHOLDER AUTHOR NAME WITH LINK TO AUTHOR PAGE</div>
+<div class="page-body">{{page.content}}</div>
+<hr/>
+<a href="PLACEHOLDER_URL_TITLE/edit" class="btn btn-primary">edit this page</a>
+<a href="PLACEHOLDER_URL_TITLE/delete" class="btn btn-danger">delete this page</a>
 {% endblock %}

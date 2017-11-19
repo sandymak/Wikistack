@@ -5,11 +5,6 @@ var db = new Sequelize('postgres://localhost:5432/wikistack', {
   logging: false
 });
 
-// USER
-
-// field	description
-// name	full name of the user
-// email	a unique, identifying email address
 const User = db.define('user', {
   name: {
     type: Sequelize.STRING(255),
@@ -62,6 +57,10 @@ const Page = db.define('page', {
       }
     }
   }
+});
+
+Page.belongsTo(User, {
+  as: 'author'
 });
 
 module.exports = {

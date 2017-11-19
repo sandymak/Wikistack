@@ -45,12 +45,12 @@ app.use((err, req, res, next) => {
 
 // APP LISTENER w/ DB SYNC
 Page.sync({
-    // force: true
+    force: true
   })
   .then(() => {
     User.sync({
-      // force: true
-    })
+      force: true
+    });
   })
   .then(() => {
     app.listen(3000, () => console.log('listening on 3000!'));

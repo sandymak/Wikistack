@@ -21,10 +21,25 @@ router.get('/', (req, res, next) => {
 
 // POST /wiki/
 router.post('/', (req, res, next) => {
-  var page = Page.build(req.body);
-  page.save()
-    .then(function (savedPage) {
-      res.redirect(savedPage.route);
+  User.findOrCreate({
+      where: {
+        name: req.body.name,
+      }
+    })
+    .then(function (values) {
+      var user = values[0];
+
+      var page = Page.build({
+        title: req.body.title,
+        content: req.body.content
+      });
+      return page.save()
+        .then(function (page) {
+          return page.setAuthor(user);
+        });
+    })
+    .then(function (page) {
+      res.redirect(page.route);
     })
     .catch(next);
 });
@@ -48,8 +63,7 @@ router.get('/:urlTitle', (req, res, next) => {
       res.render('wikipage', {
         // key ==> on nunjucks!
         // value ==> query data!
-        title: page.title,
-        content: page.content
+        page: page
       });
     })
     .catch(next);
