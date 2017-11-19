@@ -39,16 +39,17 @@ app.get('/', (req, res, next) => {
 
 //ERROR HANDLER
 app.use((err, req, res, next) => {
-  res.send(err);
+  console.error(err);
+  res.status(500).send(err);
 });
 
 // APP LISTENER w/ DB SYNC
 Page.sync({
-    force: true
+    // force: true
   })
   .then(() => {
     User.sync({
-      force: true
+      // force: true
     })
   })
   .then(() => {
